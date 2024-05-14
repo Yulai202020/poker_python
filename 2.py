@@ -1,4 +1,5 @@
 from combinations import *
+from player import Player
 
 def sort_cards(cards):
     result = []
@@ -6,8 +7,8 @@ def sort_cards(cards):
         result.append([cards[i][0], cards[i][1:]])
     return result
 
-hand1 = sort_cards(["hK","h9"])
-desk = sort_cards(["p6","d10", "pK", "pQ", "h10"])
+hand1 = sort_cards(["hK", "h9"])
+desk = sort_cards(["p6", "d10", "pK", "pQ", "h10"])
 hand2 = sort_cards(["p3", "p7"])
 
 if is_flush(hand1, desk)[0] and not is_flush(hand2, desk)[0]:
