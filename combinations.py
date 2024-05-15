@@ -7,8 +7,51 @@ def power_of(card):
     else:
         return nums.index(card[1:])+2
 
+def idk(hand,desk):
+    a = desk + hand
+    g = {}
+    for i in [5,6]:
+        b = {} 
+        for k in a:
+            if a[i][1] == k[1]:
+                try:
+                    b[k[1]] += 1
+                except:
+                    b[k[1]] = 1
+        for j in list(b.keys()):
+            g[j]=b[j]
+    
+    return g
+
+def is_n_of_kind(hand, desk, n):
+    a = idk(hand, desk)
+    j = 0
+    sets = []
+    for i in list(a.keys()):
+        if a[i] == n:
+            j = nums.index(i)+2
+            sets.append(j)
+
+    if len(sets) != 0:
+        j = max(sets)
+        return (True, j)
+
+    else:
+        return (False, None)
+
+def is_one_pair(hand, desk):
+    return is_n_of_kind(hand, desk, 2)
+
+def is_set(hand, desk):
+    return is_n_of_kind(hand, desk, 3)
+
+def is_quards(hand, desk):
+    return is_n_of_kind(hand, desk, 4)
+
 def is_flush_royal(hand, desk):
     a = desk + hand
+
+    suits = [i[0] for i in a]
 
     suits_str = ''
     for i in suits:
@@ -38,6 +81,8 @@ def is_flush_royal(hand, desk):
                 return (False, None)
         else:
             return (False, None)
+    else:
+        return (False, None)
 
 def is_flush(hand, desk):
     a = desk + hand
@@ -56,7 +101,7 @@ def is_flush(hand, desk):
 
     flush_suit = most_common_element(suits_str)
 
-    if len(set([i[0] for i in a])) < 4:
+    if suits.count(flush_suit) == 5:
         ids = []
         for i in range(7):
             if a[i][0] == flush_suit:
