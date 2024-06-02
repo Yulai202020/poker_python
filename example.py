@@ -87,10 +87,13 @@ b = {}
 
 for i in range(len(a)):
     if is_flush_royal(a[i], desk)[0]:
-        b[i] = [5, is_flush_royal(a[i], desk)[1]]
+        b[i] = [6, is_flush_royal(a[i], desk)[1]]
 
     elif is_quards(a[i], desk)[0]:
-        b[i] = [4, is_quards(a[i], desk)[1]]
+        b[i] = [5, is_quards(a[i], desk)[1]]
+
+    elif is_fullhouse(a[i], desk)[0]:
+        b[i] = [4, is_fullhouse(a[i], desk)[1]]
 
     elif is_flush(a[i], desk)[0]:
         b[i] = [3, is_flush(a[i], desk)[1]]

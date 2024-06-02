@@ -48,6 +48,47 @@ def is_set(hand, desk):
 def is_quards(hand, desk):
     return is_n_of_kind(hand, desk, 4)
 
+def is_fullhouse(hand, desk):
+    if is_set(hand, desk)[0]:
+        idididi = desk
+        for i in desk:
+            if i[1] == nums[is_set(hand, desk)[1]-2]:
+                idididi.remove(i)
+        a = []
+        for i in desk:
+            if desk.count(i) == 2:
+                a.append(i)
+        
+        if len(a) != 0:
+            g1 = [is_set(hand, desk)[1], power_of(max(a)[1])]
+            print(g1)
+            return (True, max(g1))
+        else:
+            return (False, None)
+
+    elif is_one_pair(hand, desk)[0]:
+        idididi = desk
+        for i in desk:
+            if i[1] == nums[is_set(hand, desk)[1]-2]:
+                idididi.remove(i)
+        a = []
+        for i in desk:
+            if desk.count(i) == 3:
+                a.append(i)
+        
+        if len(a) != 0:
+            g1 = [is_set(hand, desk)[1], power_of(max(a)[1])]
+            print(g1)
+            return (True, max(g1))
+        else:
+            return (False, None)
+
+    elif is_one_pair(hand, desk)[0] and is_set(hand, desk)[0]:
+        return (True, max([i[0] for i in hand]))
+
+    else:
+        return (False, None)
+
 def is_flush_royal(hand, desk):
     a = desk + hand
 
@@ -101,14 +142,14 @@ def is_flush(hand, desk):
 
     flush_suit = most_common_element(suits_str)
 
-    if suits.count(flush_suit) == 5:
+    if suits.count(flush_suit) >= 5:
         ids = []
         for i in range(7):
             if a[i][0] == flush_suit:
                 ids.append(i)
 
         if 5 in ids and 6 not in ids:
-            return (True, power_of[hand[0]])
+            return (True, power_of(hand[0]))
 
         elif 6 in ids and 5 not in ids:
             return (True, power_of(hand[1]))
